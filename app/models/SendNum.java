@@ -36,4 +36,8 @@ public class SendNum {
 	 */
 	@Column
 	public String day; 
+	
+	public static void count(){
+		
+	}
 }

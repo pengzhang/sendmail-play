@@ -1,7 +1,44 @@
-@(message: String)
+@(website: String)
 
-@main("Welcome to Play 2.1") {
+@main(website) {
     
-    @play20.welcome(message, style = "Java")
+   <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h1>大土狗邮件中心</h1>
+        <div class="span8 offset1">
+            <input type="text" class="span6" style="height: 35px" placeholder="输入电子邮箱,进行测试">
+        </div>
+        <a class="btn btn-large btn-success" href="#">试试,走你...</a>
+      </div>
+
+      <hr>
+
+      <!-- Example row of columns -->
+      <div class="row-fluid">
+          <div class="span4">
+              <div class="span6 offset3">
+                  <h2>发送总数</h2>
+              </div>
+              <div class="span2 offset4">
+                  <span class="label label-success"><h1>50</h1></span>
+              </div>
+          </div>
+        <div class="span4">
+            <div class="span7 offset2">
+                <h2>今日发送数</h2>
+            </div>
+            <div class="span2 offset4">
+                <span class="label label-info"><h1>50</h1></span>
+            </div>
+       </div>
+        <div class="span4">
+          <div class="span9 offset1">
+              <h2>单日最大发送数</h2>
+          </div>
+           <div class="span2 offset4">
+               <span class="label label-important"><h1>50</h1></span>
+           </div>
+        </div>
+      </div>
     
 }

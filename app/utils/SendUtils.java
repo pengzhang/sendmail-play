@@ -14,6 +14,9 @@ import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 
+import play.Logger;
+
+
 
 /**
  * 发送工具类
@@ -32,18 +35,25 @@ public class SendUtils {
 	 * @param content
 	 * @throws EmailException 
 	 */
-	public static void mail(SEmail semail) throws EmailException{
-		Email email = new SimpleEmail();
-		email.setHostName(AppConfig.Email_Host);
-		email.setSmtpPort(AppConfig.Email_Port);
-		email.setAuthenticator(new DefaultAuthenticator(AppConfig.Email_Username, AppConfig.Email_Password));
-		email.setSSLOnConnect(true);
-		email.setFrom(AppConfig.Email_Email,AppConfig.Eamil_ShowName);
-		email.setSubject(semail.subject);
-		email.setCharset("utf-8");
-		email.setMsg(semail.content);
-		email.addTo(semail.email);
-		email.send();
+	public static void mail(SEmail semail){
+		
+		try {
+			Email email = new SimpleEmail();
+			email.setHostName(AppConfig.Email_Host);
+			email.setSmtpPort(AppConfig.Email_Port);
+			email.setAuthenticator(new DefaultAuthenticator(
+					AppConfig.Email_Username, AppConfig.Email_Password));
+			email.setSSLOnConnect(true);
+			email.setFrom(AppConfig.Email_Email, AppConfig.Eamil_ShowName);
+			email.setSubject(semail.subject);
+			email.setCharset("utf-8");
+			email.setMsg(semail.content);
+			email.addTo(semail.email);
+			email.send();
+		} catch (EmailException e) {
+			Logger.info("Send Mail Exception =>" + e.getMessage());
+		}
+
 
 	}
 	
