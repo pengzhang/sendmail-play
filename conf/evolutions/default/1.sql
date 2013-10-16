@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table sendnum (
-  id                        integer not null,
+  id                        integer auto_increment not null,
   stotal                    bigint,
   stoday                    bigint,
   sday_max                  bigint,
@@ -13,32 +13,24 @@ create table sendnum (
 ;
 
 create table sendrecord (
-  id                        bigint not null,
+  id                        bigint auto_increment not null,
   remote_ip                 varchar(255),
   email                     varchar(255),
-  status                    boolean,
+  status                    tinyint(1) default 0,
   create_at                 varchar(255),
   constraint pk_sendrecord primary key (id))
 ;
-
-create sequence sendnum_seq;
-
-create sequence sendrecord_seq;
 
 
 
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+SET FOREIGN_KEY_CHECKS=0;
 
-drop table if exists sendnum;
+drop table sendnum;
 
-drop table if exists sendrecord;
+drop table sendrecord;
 
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists sendnum_seq;
-
-drop sequence if exists sendrecord_seq;
+SET FOREIGN_KEY_CHECKS=1;
 
