@@ -41,7 +41,7 @@ public class Application extends Controller {
     	List<SendRecord> sr = SendRecord.getPage(page, size);
     	Page pg = new Page();
 		pg.currentPage = page+1;
-		pg.totalPage = (int) (SendNum.getNum().stotal/size);
+		pg.totalPage = (int) (SendNum.getNum().stotal/size)+1;
         return ok(sendlog.render(website,sr,pg));
     }
     
