@@ -1,7 +1,12 @@
-@(message: String)
-
-@main("Welcome to Play 2.1") {
-    
+@(message: String,sr:List[models.SendRecord],pg:models.Page)
+@import utils.StringUtils
+@main(message) {
+<script>
+$(document).ready(function(){
+		$(".nav li").removeClass("active");
+		$("#sli").addClass("active");
+})
+</script>    
 <!-- Example row of columns -->
       <div class="row-fluid">
           <table class="table table-hover">
@@ -15,29 +20,19 @@
               </tr>
               </thead>
               <tbody>
+              @for(i <- 0 to sr.size()-1){
               <tr>
-                  <td>...</td>
-                  <td>...</td>
-                  <td>...</td>
+                  <td>@(i+1)</td>
+                  <td>@sr.get(i).remote_ip</td>
+                  <td>@sr.get(i).email</td>
                   <td><span class="label label-success">成功</span></td>
-                  <td>...</td>
+                  <td>@sr.get(i).create_at</td>
               </tr>
+              }
               </tbody>
           </table>
       </div>
       <div class="row-fluid">
-          <div class="span6 offset4">
-              <div class="pagination">
-                  <ul>
-                      <li><a href="#">Prev</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                      <li><a href="#">Next</a></li>
-                  </ul>
-              </div>
-          </div>
+              @page(pg)
       </div>
 }

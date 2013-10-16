@@ -40,6 +40,15 @@ public class AppConfig {
 	 */
 	public static String WebSiteName = getConfig("website");
 	
+	/**
+	 * 测试邮件的主题
+	 */
+	public static String TryEmailSubject = getConfig("try.email.subject");
+	
+	/**
+	 * 测试邮件的内容
+	 */
+	public static String TryEmailContent = getConfig("try.email.content");
 
 			
 	private static String getConfig(String config){

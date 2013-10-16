@@ -1,14 +1,32 @@
-@(website: String)
+@(website: String,sn: models.SendNum)
 
 @main(website) {
-    
+  <script>
+  $(document).ready(function(){
+	  var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	  $("#try_send").click(function(){
+		  var email = $("#email").val();
+		  if(email==null){
+			  alert("email is null");
+		  }else{
+			  if(reg.test(email)){
+				  location.href="/try/"+email;
+			  }else{
+				 alert("email is not right"); 
+			  }
+		  }
+		  
+	  })
+	  
+  })
+  </script>  
    <!-- Jumbotron -->
       <div class="jumbotron">
         <h1>大土狗邮件中心</h1>
         <div class="span8 offset1">
-            <input type="text" class="span6" style="height: 35px" placeholder="输入电子邮箱,进行测试">
+            <input type="text" id="email" class="span6" style="height: 35px" placeholder="输入电子邮箱,进行测试">
         </div>
-        <a class="btn btn-large btn-success" href="#">试试,走你...</a>
+        <a class="btn btn-large btn-success" id="try_send" href="#">试试,走你...</a>
       </div>
 
       <hr>
@@ -20,7 +38,7 @@
                   <h2>发送总数</h2>
               </div>
               <div class="span2 offset4">
-                  <span class="label label-success"><h1>50</h1></span>
+                  <span class="label label-success"><h1>@sn.stotal</h1></span>
               </div>
           </div>
         <div class="span4">
@@ -28,7 +46,7 @@
                 <h2>今日发送数</h2>
             </div>
             <div class="span2 offset4">
-                <span class="label label-info"><h1>50</h1></span>
+                <span class="label label-info"><h1>@sn.stoday</h1></span>
             </div>
        </div>
         <div class="span4">
@@ -36,7 +54,7 @@
               <h2>单日最大发送数</h2>
           </div>
            <div class="span2 offset4">
-               <span class="label label-important"><h1>50</h1></span>
+               <span class="label label-important"><h1>@sn.sday_max</h1></span>
            </div>
         </div>
       </div>

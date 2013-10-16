@@ -1,0 +1,39 @@
+@(page:models.Page)
+<script>
+ 		function prev(currentPage) {
+  		  $('#currentPage').val(currentPage - 1);
+  		  location.href="/sendlog/"+(currentPage - 1)+"/30";
+  		}
+
+  		function next(currentPage) {
+  		  $('#currentPage').val(currentPage + 1);
+  	      location.href="/sendlog/"+(currentPage + 1)+"/30";
+  		}
+
+  		function current(currentPage) {
+  		  $('#currentPage').val(currentPage);
+  		  location.href="/sendlog/"+(currentPage)+"/30";
+  		}
+</script>
+<input type="hidden" id="currentPage" value="@page.currentPage">
+<div class="pagination pagination-centered">
+	<ul class="font">
+		<li><a href="javascript:void(0);" onclick="current(1)">首页</a></li>
+		<li><a href="javascript:void(0);" @if(page.currentPage> 1){onclick="prev(@page.currentPage)"} >上一页</a></li> 
+		@if((page.currentPage-3)>=1){
+		<li><a href="javascript:void(0);" onclick="current(@page.currentPage-3)">@(page.currentPage-3)</a></li> }
+		@if((page.currentPage-2)>=1){
+		<li><a href="javascript:void(0);" onclick="current(@page.currentPage-2)">@(page.currentPage-2)</a></li> }
+		@if((page.currentPage-1)>=1){
+		<li><a href="javascript:void(0);" onclick="current(@page.currentPage-1)">@(page.currentPage-1)</a></li> } 
+		<li class="page-click"><a href="javascript:void(0);" onclick="current(@page.currentPage)">@(page.currentPage)</a></li>
+		@if((page.currentPage+1) <=	page.totalPage){
+		<li><a href="javascript:void(0);" onclick="current(@page.currentPage+1)">@(page.currentPage+1)</a></li> } 
+		@if((page.currentPage+2) <= page.totalPage){
+		<li><a href="javascript:void(0);" onclick="current(@page.currentPage+2)">@(page.currentPage+2)</a></li> }
+		@if((page.currentPage+3)<=page.totalPage){
+		<li><a href="javascript:void(0);" onclick="current(@page.currentPage+3)">@(page.currentPage+3)</a></li> }
+		<li><a href="javascript:void(0);" @if(page.currentPage< page.totalPage){ onclick="next(@page.currentPage)"}>下一页</a></li>
+		<li><a href="javascript:void(0);" onclick="current(@page.totalPage)">末页</a></li>
+	</ul>
+</div>
