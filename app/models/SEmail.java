@@ -14,5 +14,7 @@ public class SEmail {
 	 * 邮件内容
 	 */
 	public String content;
+	
+	public String remote_ip;
 
 }

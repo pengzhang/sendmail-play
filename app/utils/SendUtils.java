@@ -5,6 +5,7 @@ import java.net.URL;
 
 import models.SAttachment;
 import models.SEmail;
+import models.SendRecord;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -53,7 +54,12 @@ public class SendUtils {
 		} catch (EmailException e) {
 			Logger.info("Send Mail Exception =>" + e.getMessage());
 		}
-
+		
+		SendRecord sr = new SendRecord();
+    	sr.email = semail.email;
+    	sr.remote_ip = semail.remote_ip;
+    	sr.status = true;
+    	SendRecord.save(sr);
 
 	}
 	

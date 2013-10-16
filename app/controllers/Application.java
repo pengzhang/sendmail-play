@@ -25,17 +25,13 @@ public class Application extends Controller {
     }
     
     public static Result sendtry(String email) {
-    	String remoteIp = request().remoteAddress();
     	SEmail smail = new SEmail();
     	smail.email = email;
     	smail.subject = AppConfig.TryEmailSubject;
     	smail.content = AppConfig.TryEmailContent;
+    	smail.remote_ip = request().remoteAddress();
     	SendUtils.mail(smail);
-    	SendRecord sr = new SendRecord();
-    	sr.email = email;
-    	sr.remote_ip = remoteIp;
-    	sr.status = true;
-    	SendRecord.save(sr);
+    	
     	return redirect("/");
     }
     
@@ -57,10 +53,12 @@ public class Application extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public static Result sendMail() {
       JsonNode json = request().body().asJson();
+      
       SEmail semail = new SEmail();
       semail.email = json.findPath("email").getTextValue();
       semail.subject = json.findPath("subject").getTextValue();
       semail.content = json.findPath("content").getTextValue();
+      semail.remote_ip = request().remoteAddress();
       SendUtils.mail(semail);
       return ok("{\"status\":\"success\"}").as("application/json");
     }
